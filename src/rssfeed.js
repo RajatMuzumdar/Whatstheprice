@@ -81,7 +81,7 @@ const CurrencyNews = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const CORS_PROXY = 'http://localhost:3000/';
+  const CORS_PROXY = 'https://whatstheprice.vercel.app/';
 
   const fetchData = useCallback(async () => {
     try {
