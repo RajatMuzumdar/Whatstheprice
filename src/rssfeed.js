@@ -81,7 +81,7 @@
 //   const [loading, setLoading] = useState(true);
 //   const [error, setError] = useState(null);
 
-//   const CORS_PROXY = 'https://whatstheprice.vercel.app/';
+//   const CORS_PROXY = 'http://localhost:3000/';
 
 //   const fetchData = useCallback(async () => {
 //     try {
@@ -150,10 +150,7 @@
 // };
 
 // export default CurrencyNews;
-
-
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Typography,
   CircularProgress,
@@ -172,30 +169,30 @@ const CurrencyNews = () => {
   const RSS_FEED_URL =
     'https://www.reutersagency.com/feed/?best-sectors=foreign-exchange-fixed-income&post_type=best';
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(RSS_FEED_URL);
-        const data = await response.text();
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(data, 'application/xml');
-        const items = Array.from(xml.querySelectorAll('item')).map((item) => ({
-          title: item.querySelector('title').textContent,
-          link: item.querySelector('link').textContent,
-          description: item.querySelector('description').textContent,
-        }));
-        setFeedItems(items);
-        setLoading(false);
-        setError(null);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-        setError('Error fetching data');
-      }
-    };
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await fetch(RSS_FEED_URL);
+      const data = await response.text();
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(data, 'application/xml');
+      const items = Array.from(xml.querySelectorAll('item')).map((item) => ({
+        title: item.querySelector('title').textContent,
+        link: item.querySelector('link').textContent,
+        description: item.querySelector('description').textContent,
+      }));
+      setFeedItems(items);
+      setLoading(false);
+      setError(null);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+      setError('Error fetching data');
+    }
+  }, [RSS_FEED_URL]);
 
+  useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const handleRefresh = () => {
     setLoading(true);
