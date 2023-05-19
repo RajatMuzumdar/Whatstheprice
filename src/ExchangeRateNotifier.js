@@ -38,9 +38,9 @@ const ExchangeRateNotifier = () => {
     emailjs
       .send(
         "service_h00e76c",
-        "service_h00e76c",
+        "template_67gepjd",
         templateParams,
-        "rajat"
+        "Q7gA84Gqq5S613ymk"
       )
       .then(
         (result) => {
