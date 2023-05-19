@@ -22,7 +22,7 @@ import Multipleamt from "./multipleamt";
 
 export default function Conversion() {
   const [amount, setAmount] = useState("7");
-  const [fromCurrency, setFromCurrency] = useState("USD");
+  const [fromCurrency, setFromCurrency] = useState("GBP");
   const [toCurrency, setToCurrency] = useState("INR");
   const [currencies, setCurrencies] = useState([]);
   const [result, setResult] = useState("");
