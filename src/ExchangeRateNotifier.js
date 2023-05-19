@@ -37,8 +37,8 @@ const ExchangeRateNotifier = () => {
     };
     emailjs
       .send(
-        "service_7skj89g",
-        "service_7skj89g",
+        "service_h00e76c",
+        "service_h00e76c",
         templateParams,
         "rajat"
       )
