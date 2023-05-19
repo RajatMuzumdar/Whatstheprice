@@ -111,7 +111,12 @@ export default function Conversion() {
         });
     }
   }, [fromCurrency]);
-
+useEffect(() => {
+  setAmount("1");
+  setFromCurrency("JPY");
+  setToCurrency("INR");
+  setLastEditedField("amount");
+}, []);
   function getCurrencyName(jsonData, currencyCode) {
     return jsonData[currencyCode].name;
   }
