@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  Card,
-  TextField,
-  FormControl,
-  Select,
-  MenuItem,
-  Button,
-} from "@mui/material";
-
+import { Card, TextField, FormControl, Select, MenuItem, Button } from "@mui/material";
 import emailjs from '@emailjs/browser';
 
 const ExchangeRateNotifier = () => {
-  const [fromCurrency, setFromCurrency] = useState("USD");
-  const [toCurrency, setToCurrency] = useState("INR");
+  const [currency, setCurrency] = useState("INR");
   const [currencies, setCurrencies] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,28 +19,39 @@ const ExchangeRateNotifier = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const templateParams = {
-      from_name: name,
-      to_email: email,
-      from_currency: fromCurrency,
-      to_currency: toCurrency,
-      day: time,
-    };
-    emailjs
-      .send(
-        "service_h00e76c",
-        "template_67gepjd",
-        templateParams,
-        "Q7gA84Gqq5S613ymk"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+
+    // Fetch the exchange rate from an API
+    fetch(`https://api.exchangerate-api.com/v4/latest/USD`)
+      .then((response) => response.json())
+      .then((data) => {
+        const exchangeRate = data.rates[currency];
+
+        // Add the exchange rate to the templateParams object
+        const templateParams = {
+          from_name: name,
+          to_email: email,
+          currency: currency,
+          exchange_rate: exchangeRate,
+          day: time,
+        };
+
+        // Send the email
+        emailjs
+          .send(
+            "service_h00e76c",
+            "template_67gepjd",
+            templateParams,
+            "Q7gA84Gqq5S613ymk"
+          )
+          .then(
+            (result) => {
+              console.log(result.text);
+            },
+            (error) => {
+              console.log(error.text);
+            }
+          );
+      });
   };
 
   return (
@@ -63,9 +65,6 @@ const ExchangeRateNotifier = () => {
         boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
       }}
     >
-         <Typography variant="h6">
-      Get Exchange Rate Notifications EveryDay
-    </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
           sx={{ m: 1, minWidth: "37ch" }}
@@ -86,29 +85,8 @@ const ExchangeRateNotifier = () => {
         <br />
         <FormControl sx={{ m: 1, minWidth: "37ch" }}>
           <Select
-            value={fromCurrency}
-            onChange={(event) => setFromCurrency(event.target.value)}
-            MenuProps={{
-              PaperProps: {
-                style: {
-                  maxHeight: 48 * 4.5 + 8,
-                  width: "25ch",
-                },
-              },
-            }}
-          >
-            {currencies.map((currency) => (
-              <MenuItem key={currency} value={currency}>
-                {currency}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <br />
-        <FormControl sx={{ m: 1, minWidth: "37ch" }}>
-          <Select
-            value={toCurrency}
-            onChange={(event) => setToCurrency(event.target.value)}
+            value={currency}
+            onChange={(event) => setCurrency(event.target.value)}
             MenuProps={{
               PaperProps: {
                 style: {
@@ -138,8 +116,9 @@ const ExchangeRateNotifier = () => {
         <Button variant="contained" type="submit">
           Send Email
         </Button>
-</form>
-</Card>
-);
-}
+      </form>
+    </Card>
+  );
+};
+
 export default ExchangeRateNotifier;
