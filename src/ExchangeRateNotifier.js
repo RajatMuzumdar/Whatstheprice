@@ -133,7 +133,7 @@ const ExchangeRateNotifier = () => {
       </form>
       <Snackbar
         open={emailSent}
-        autoHideDuration={6000}
+        autoHideDuration={700}
         message="Email sent successfully!"
       />
     </Card>
