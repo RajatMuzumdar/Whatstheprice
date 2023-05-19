@@ -72,12 +72,11 @@ const ExchangeRateNotifier = () => {
         maxHeight: "50ch",
         alignContent: "Center",
         padding: "5ch",
-        margin: "5ch",
         boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
       }}
     >
-      <Typography>
-        Get Exchange Rate Notifications EveryDay
+      <Typography >
+        Get Exchange Rate Notifications 
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
@@ -133,8 +132,10 @@ const ExchangeRateNotifier = () => {
       </form>
       <Snackbar
         open={emailSent}
-        autoHideDuration={700}
+        autoHideDuration={300}
         message="Email sent successfully!"
+        onClose={() => setEmailSent(false)}
+
       />
     </Card>
   );
