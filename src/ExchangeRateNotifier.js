@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Card, TextField, FormControl, Select, MenuItem, Button, Typography } from "@mui/material";
+import {
+  Card,
+  TextField,
+  FormControl,
+  Select,
+  MenuItem,
+  Button,
+  Snackbar,
+  Typography
+} from "@mui/material";
 import emailjs from '@emailjs/browser';
 
 const ExchangeRateNotifier = () => {
@@ -8,6 +17,7 @@ const ExchangeRateNotifier = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [time, setTime] = useState("08:00");
+  const [emailSent, setEmailSent] = useState(false);
 
   useEffect(() => {
     fetch("https://api.exchangerate-api.com/v4/latest/USD")
@@ -46,6 +56,7 @@ const ExchangeRateNotifier = () => {
           .then(
             (result) => {
               console.log(result.text);
+              setEmailSent(true);
             },
             (error) => {
               console.log(error.text);
@@ -64,9 +75,10 @@ const ExchangeRateNotifier = () => {
         margin: "5ch",
         boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
       }}
-    > <Typography >
-      Get Exchange Rate Notifications EveryDay
-    </Typography>
+    >
+      <Typography>
+        Get Exchange Rate Notifications EveryDay
+      </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
           sx={{ m: 1, minWidth: "37ch" }}
@@ -119,6 +131,11 @@ const ExchangeRateNotifier = () => {
           Send Email
         </Button>
       </form>
+      <Snackbar
+        open={emailSent}
+        autoHideDuration={6000}
+        message="Email sent successfully!"
+      />
     </Card>
   );
 };
