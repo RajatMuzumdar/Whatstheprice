@@ -16,7 +16,7 @@ const ExchangeRateNotifier = () => {
   const [currencies, setCurrencies] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [time, setTime] = useState("08:00");
+  const [time, setTime] = useState("07:00");
   const [emailSent, setEmailSent] = useState(false);
 
   useEffect(() => {
