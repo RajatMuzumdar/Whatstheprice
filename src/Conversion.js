@@ -34,7 +34,7 @@ export default function Conversion() {
   useEffect(() => {
     const currencies = Currcode.map((item) => item.currency_code);
     setCurrencies(currencies);
-    setFromCurrency(currencies[212]);
+    setFromCurrency(currencies[211]);
     setToCurrency(currencies[92]);
   }, []);
 
