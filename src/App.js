@@ -16,8 +16,8 @@ function App() {
 
       <Navbar />
       <Conversion />
-      {/* <ExchangeRateNotifier />  */}
-       <CurrencyNews/>
+ <ExchangeRateNotifier /> 
+//        <CurrencyNews/>
       {/* <PPP /> */}
       <Footer />
     </div>
