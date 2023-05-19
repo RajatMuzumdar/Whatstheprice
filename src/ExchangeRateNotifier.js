@@ -7,7 +7,7 @@ import {
   MenuItem,
   Button,
   Snackbar,
-  Typography
+  Typography,
 } from "@mui/material";
 import emailjs from '@emailjs/browser';
 
