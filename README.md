@@ -82,6 +82,6 @@ Please ensure that your code follows the project's coding conventions and includ
 
 ## Live Demo
 
-You can access the live demo of the Whatstheprice currency converter application at [whatstheprice.vercel.app](whatstheprice.vercel.app).
+You can access the live demo of the Whatstheprice currency converter application at [whatstheprice.vercel.app](https://whatstheprice.vercel.app/).
 
 Please note that the live demo may not reflect the latest changes made to the repository.
