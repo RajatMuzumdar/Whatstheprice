@@ -171,14 +171,18 @@ const CurrencyNews = () => {
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await fetch(RSS_FEED_URL);
+      const CORS_PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
+      console.log(`Fetching data from ${RSS_FEED_URL}`);
+      const response = await fetch(`${CORS_PROXY_URL}${RSS_FEED_URL}`);
       const data = await response.text();
+      console.log(`Response data: ${data}`);
       const parser = new DOMParser();
       const xml = parser.parseFromString(data, 'application/xml');
       const items = Array.from(xml.querySelectorAll('item')).map((item) => ({
         title: item.querySelector('title').textContent,
         link: item.querySelector('link').textContent,
-        description: item.querySelector('description').textContent,
+        creator: item.querySelector('dc\\:creator').textContent,
+        content: item.querySelector('content\\:encoded').textContent,
       }));
       setFeedItems(items);
       setLoading(false);
@@ -222,7 +226,16 @@ const CurrencyNews = () => {
                       {item.title}
                     </Link>
                   }
-                  secondary={item.description}
+                  secondary={
+                    <>
+                      <Typography variant="subtitle2">{item.creator}</Typography>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: item.content,
+                        }}
+                      />
+                    </>
+                  }
                 />
               </ListItem>
             ))}

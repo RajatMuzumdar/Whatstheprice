@@ -6,25 +6,31 @@ import {
   TableHead,
   TableRow,
   Card,
-  Typography
+  Typography,
 } from "@mui/material";
-import flags from "./flag.json";
+// import flags from "./flag.json";
+import { tableCellClasses } from "@mui/material/TableCell";
 
 const ConversionTable = ({ amount, rates }) => {
   return (
     <Card
       sx={{
-        // maxWidth: "40ch",
-        // maxHeight: "50ch",
         padding: "5ch",
         margin: "2rem",
         boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
       }}
-    >  <Typography variant="h4" component="h2" align="center" gutterBottom>
-     Current Rates
-  </Typography>
+    >
+      {" "}
+      <Typography variant="h4" component="h2" align="center" gutterBottom>
+        Current Rates
+      </Typography>
       <Table
-        sx={{ m: 1}}
+        sx={{
+          m: 1,
+          [`& .${tableCellClasses.root}`]: {
+            borderBottom: "none",
+          },
+        }}
         style={{
           backgroundColor: "white",
         }}
@@ -37,18 +43,17 @@ const ConversionTable = ({ amount, rates }) => {
             <TableCell style={{ fontSize: "25px", textAlign: "center" }}>
               Currency
             </TableCell>
-            <TableCell style={{ fontSize: "25px", textAlign: "center"}}>
+            <TableCell style={{ fontSize: "25px", textAlign: "center" }}>
               Amount
             </TableCell>
           </TableRow>
         </TableHead>
-        <TableBody >
+        <TableBody>
           {Object.entries(rates).map(([currency, rate]) => {
-            const country = Object.values(flags).find(
-              (country) => country.name === currency
-            );
+            // const country = Object.values(flags).find(
+            //   (country) => country.name === currency
+            // );
             return (
-              
               <TableRow key={currency}>
                 {/* <TableCell style={{ fontSize: "17px", textAlign: "center", padding: "1ch" }}>
                   {country && (
@@ -63,7 +68,7 @@ const ConversionTable = ({ amount, rates }) => {
                 <TableCell style={{ fontSize: "17px", textAlign: "center" }}>
                   {currency}
                 </TableCell>
-                <TableCell style={{ fontSize: "17px", textAlign: "center"}}>
+                <TableCell style={{ fontSize: "17px", textAlign: "center" }}>
                   {(amount * rate).toFixed(2)}
                 </TableCell>
               </TableRow>

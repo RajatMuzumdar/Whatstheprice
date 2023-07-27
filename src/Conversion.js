@@ -106,17 +106,16 @@ export default function Conversion() {
             AED: data.rates.AED,
             RWF: data.rates.RWF,
             CHF: data.rates.CHF,
-            
           });
         });
     }
   }, [fromCurrency]);
-useEffect(() => {
-  setAmount("1");
-  setFromCurrency("JPY");
-  setToCurrency("INR");
-  setLastEditedField("amount");
-}, []);
+  useEffect(() => {
+    setAmount("1");
+    setFromCurrency("JPY");
+    setToCurrency("INR");
+    setLastEditedField("amount");
+  }, []);
   function getCurrencyName(jsonData, currencyCode) {
     return jsonData[currencyCode].name;
   }
@@ -141,36 +140,37 @@ useEffect(() => {
   }
   const tocurrencySymbol = getCurrencySymbol(jsonData, toCurrency);
   const fromcurrencySymbol = getCurrencySymbol(jsonData, fromCurrency);
-
   return (
     <div>
       <Grid
         container
         spacing={2}
-        sx={{ justifyContent: "center", paddingTop: "20vh" }}
+        sx={{
+          justifyContent: "center",
+          paddingTop: { xs: "10ch", md: "20ch" },
+          textAlign: "center",
+        }}
       >
-        <Grid item xs={2}>
+        <Grid item xs={12} md={3}>
           <CountryCard countryName={fromCountryName} />
         </Grid>
-        <Grid item xs={7}>
+        
+        <Grid item xs={12} md={6}>
           <Box display="flex" justifyContent="center">
             <Card
               sx={{
-                maxWidth: "80ch",
-                maxHeight: "70ch",
-                alignContent: "Center",
-                alignSelf: "Center",
-                padding: "5ch",
+                maxWidth: { xs: "60%", md: "60ch" },
+                maxHeight: { xs: "100%", md: "40ch" },
+                padding: { xs: "3ch", md: "5ch" },
                 boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
               }}
             >
-              {" "}
               <Typography
                 variant="h4"
                 sx={{
                   fontWeight: "bold",
                   fontFamily: "Monospace",
-                  fontSize: "2.5rem",
+                  fontSize: { xs: "1.8rem", md: "2.5rem" },
                   textShadow: "2px 2px 2px rgba(0, 0, 0, 0.2)",
                 }}
               >
@@ -178,8 +178,10 @@ useEffect(() => {
               </Typography>
               <br />
               <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <FormControl sx={{ m: 1, minWidth: "37ch" }}>
+                <Grid item xs={12} md={6}>
+                  <FormControl
+                    sx={{ m: 1, minWidth: { xs: "80%", md: "25ch" } }}
+                  >
                     <InputLabel id="select-from">FROM</InputLabel>
                     <Select
                       labelId="select-from"
@@ -190,7 +192,7 @@ useEffect(() => {
                         PaperProps: {
                           style: {
                             maxHeight: 48 * 4.5 + 8,
-                            width: "25ch",
+                            maxWidth: "25ch",
                           },
                         },
                       }}
@@ -230,7 +232,7 @@ useEffect(() => {
                     />
                   </div>
                   <TextField
-                    sx={{ m: 1, minWidth: "37ch" }}
+                    sx={{ m: 1, minWidth: { xs: "80%", md: "15ch" } }}
                     label="AMOUNT"
                     type="text"
                     value={Number(amount)}
@@ -238,8 +240,10 @@ useEffect(() => {
                     onChange={handleAmountChange}
                   />
                 </Grid>
-                <Grid item xs={6}>
-                  <FormControl sx={{ m: 1, minWidth: "37ch" }}>
+                <Grid item xs={12} md={6}>
+                  <FormControl
+                    sx={{ m: 1, minWidth: { xs: "80%", md: "25ch" } }}
+                  >
                     <InputLabel id="select-to">TO</InputLabel>
                     <Select
                       labelId="select-to"
@@ -265,8 +269,8 @@ useEffect(() => {
 
                   <div
                     sx={{
-                      maxWidth: "84ch",
-                      maxHeight: "40ch",
+                      maxWidth: { xs: "100%", md: "84ch" },
+                      maxHeight: { xs: "100%", md: "40ch" },
                       alignContent: "Center",
                     }}
                   >
@@ -297,7 +301,7 @@ useEffect(() => {
                   </div>
 
                   <TextField
-                    sx={{ m: 1, minWidth: "37ch" }}
+                    sx={{ m: 1, minWidth: { xs: "80%", md: "27ch" } }}
                     label="RESULT"
                     type="text"
                     ref={rsltInp}
@@ -326,13 +330,13 @@ useEffect(() => {
               )}
             </Card>
           </Box>
-        </Grid>{" "}
-        <Grid item xs={2}>
+        </Grid>
+        <Grid item xs={12} md={3}>
           <CountryCard countryName={toCountryName} />
         </Grid>
       </Grid>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         <Grid item xs={12} sm={6}>
           <CurrencyGraph country={fromCountryName} />
         </Grid>
@@ -344,32 +348,27 @@ useEffect(() => {
 
       <Card
         style={{
-          margin: "10ch",
-          maxWidth: "145ch",
-          paddingLeft: "3ch",
-          paddingRight: "3ch",
-          paddingBottom: "3ch",
+          margin: "3rem",
+          maxWidth: "100%",
+          padding: "5ch",
           backgroundColor: "white",
-          border: "1px soft black",
           boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
           borderRadius: "10px",
         }}
       >
-        {" "}
         <Typography
           variant="h5"
-          style={{ fontSize: "20px", textAlign: "center", padding: "2vh" }}
+          style={{ fontSize: "20px", textAlign: "center" }}
         >
           Popular Conversion
         </Typography>
         <Box
           sx={{
             textAlign: "center",
-            padding: "1rem",
-            "@media (min-width: 400rem)": {
+            "@media (min-width: 20rem)": {
               display: "flex",
               justifyContent: "center",
-              height: "20ch",
+              height: "100%",
             },
           }}
         >
@@ -645,7 +644,7 @@ useEffect(() => {
               >
                 CHF to QAR
               </Button>
-            </Grid>
+            </Grid>{" "}
           </Grid>
         </Box>
       </Card>

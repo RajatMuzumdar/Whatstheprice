@@ -16,12 +16,14 @@ export default function Footer() {
     <Box
       sx={{
         background: `linear-gradient(0deg, #000066 10%, #4a2c82 100%)`,
-        padding: { xs: "4vw", md: "2vh" },
+        padding: { xs: "4ch", md: "2ch" },
         color: "white",
         display: "flex",
-        flexDirection: { xs: "column", md: "row" },
-        justifyContent: { md: "space-between" },
-        alignItems: { xs: "center", md: "flex-start" },
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
+
       }}
     >
       <Box
@@ -73,7 +75,7 @@ export default function Footer() {
           </Box>
         </form>
       </Box>
-
+  
       <Box
         sx={{
           py: { xs: "2ch", md: 2 },
@@ -120,4 +122,4 @@ export default function Footer() {
       </Box>
     </Box>
   );
-}
+}  

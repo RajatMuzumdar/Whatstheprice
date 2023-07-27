@@ -7,8 +7,8 @@ import Navbar from "./Navbar";
 // import PPP from "./test";
 import Footer from "./footer";
 // import background from "./background";
-import ExchangeRateNotifier from "./ExchangeRateNotifier";
-import CurrencyNews from "./rssfeed";
+// import ExchangeRateNotifier from "./ExchangeRateNotifier";
+// import CurrencyNews from "./rssfeed";
 //MAIN APP
 function App() {
   return (
@@ -16,9 +16,9 @@ function App() {
 
       <Navbar />
       <Conversion />
- <ExchangeRateNotifier /> 
- {/*     <CurrencyNews/>
-       <PPP /> */}
+ {/* <ExchangeRateNotifier />  */}
+      {/* <CurrencyNews/> */}
+      {/* <PPP /> */}
       <Footer />
     </div>
   );

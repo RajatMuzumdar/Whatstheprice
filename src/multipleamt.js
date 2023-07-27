@@ -7,7 +7,8 @@ import {
   TableCell,
   TableBody,
   Typography,
-} from '@mui/material';
+} from "@mui/material";
+import { tableCellClasses } from "@mui/material/TableCell";
 
 const ExchangeRates = ({ fromCurrency, toCurrency }) => {
   const [rates, setRates] = useState({});
@@ -21,16 +22,30 @@ const ExchangeRates = ({ fromCurrency, toCurrency }) => {
       setRates(data.rates);
     };
     fetchRates();
-
-
   }, [fromCurrency]);
 
   return (
-    <Card sx={{ maxWidth: "50ch", maxHeight: "280ch", padding: "3ch", margin:"2rem",  boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)", }}>
+    <Card
+      sx={{
+        // maxWidth: "50ch",
+        // maxHeight: "280ch",
+        padding: "3ch",
+        margin: "2rem",
+        boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
+      }}
+    >
       <Typography variant="h4" component="h2" align="center" gutterBottom>
         {fromCurrency} to {toCurrency} Conversion Rates
       </Typography>
-      <Table sx={{ m: 1 }} style={{ backgroundColor: "white" }}>
+      <Table
+        sx={{
+          m: 1,
+          [`& .${tableCellClasses.root}`]: {
+            borderBottom: "none",
+          },
+        }}
+        style={{ backgroundColor: "white" }}
+      >
         <TableHead>
           <TableRow>
             <TableCell style={{ fontSize: "25px", textAlign: "center" }}>
