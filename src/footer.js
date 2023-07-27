@@ -19,9 +19,9 @@ export default function Footer() {
         padding: { xs: "4vw", md: "2vh" },
         color: "white",
         display: "flex",
-        flexDirection: { xs: "column", md: "row" },
-        justifyContent: { md: "space-between" },
-        alignItems: { xs: "center", md: "flex-start" },
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <Box
@@ -73,7 +73,7 @@ export default function Footer() {
           </Box>
         </form>
       </Box>
-
+  
       <Box
         sx={{
           py: { xs: "2ch", md: 2 },
@@ -120,4 +120,4 @@ export default function Footer() {
       </Box>
     </Box>
   );
-}
+}  
